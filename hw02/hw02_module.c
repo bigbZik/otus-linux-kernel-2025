@@ -77,12 +77,16 @@ static int parm_get_my_str(char *buf, const struct kernel_param *kp) {
   return sprintf(buf, "%s", my_str);
 }
 
+/*  my_str read-only */
+/*
 static int parm_set_my_str(const char *val, const struct kernel_param *kp) {
   return -EPERM; // Read-only
 }
+*/
 
 static const struct kernel_param_ops parm_ops_my_str = {
-    .set = parm_set_my_str,
+/*  .set = parm_set_my_str, */
+    .set = NULL, // Read-only
     .get = parm_get_my_str,
 };
 module_param_cb(my_str, &parm_ops_my_str, &my_str, 0444);
